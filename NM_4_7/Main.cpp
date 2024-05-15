@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include "HermiteInterpolation.h"
+#include <time.h>
 
 using namespace std;
 
@@ -12,6 +13,7 @@ vector<vector<double>> newTable(vector<vector<double>> table,double value,int m)
 
 int main()
 {
+	srand(time(NULL));
 	double start,step,value;
 	size_t n,m;
 	vector<vector<double>> table;
@@ -19,8 +21,8 @@ int main()
 	cin >> n;
 	cout << "\nEnter the start point: ";
 	cin >> start;
-	cout << "\nEnter the step: ";
-	cin >> step;
+	/*cout << "\nEnter the step: ";
+	cin >> step;*/
 	for (int i = 0; i < n; i++)
 	{
 		vector<double> temp;
@@ -28,7 +30,7 @@ int main()
 		temp.push_back(function(start));
 		temp.push_back(derivativeOfFunction(start));
 		table.push_back(temp);
-		start += step;
+		start = rand()%10 + start +1;
 	}
 	print_table(table);
 	cout << "\nEnter the value: ";
@@ -44,12 +46,12 @@ int main()
 
 double function(double x)
 {
-	return x*x*x;
+	return x*x*x*x;
 }
 
 double derivativeOfFunction(double x)
 {
-	return x*x * 3;
+	return 4*x*x*x;
 }
 
 void print_table(vector<vector<double>> table)
